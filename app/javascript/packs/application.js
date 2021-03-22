@@ -18,3 +18,5 @@ import "bootstrap/dist/js/bootstrap"
 
 require("trix")
 require("@rails/actiontext")
+
+import './tag'
