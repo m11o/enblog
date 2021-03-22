@@ -31,8 +31,11 @@
               dt.col-md-3 = Article.human_attribute_name :description
               dd.col-md-9 = @article.description
 
-              dt.col-md-3 = Article.human_attribute_name :body
-              dd.col-md-9 = @article.body
+              dt.col-md-12.mb-2 = Article.human_attribute_name :body
+              dd.col-md-12.mb-3
+                .card
+                  .card-body
+                    == @article.body
 
               - if @article.published_at.present?
                 dt.col-md-3 = Article.human_attribute_name :published_at
