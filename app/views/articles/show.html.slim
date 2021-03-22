@@ -23,6 +23,11 @@
               dt.col-md-3 = Article.human_attribute_name :title
               dd.col-md-9 = @article.title
 
+              dt.col-md-3 = Article.human_attribute_name :tags
+              dd.col-md-9
+                - @article.tags.each do |tag|
+                  span.badge.bg-secondary.text-light.mr-1.p-2 = tag.name
+
               dt.col-md-3 = Article.human_attribute_name :state
               dd.col-md-9 = @article.state
 
