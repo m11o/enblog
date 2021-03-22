@@ -30,3 +30,10 @@
           .mb-3
             = f.label :language, class: 'form-label'
             = f.select :language, options_for_select(Article.languages_i18n.invert, f.object.language), {}, { class: 'form-control' }
+
+          .mb-3
+            = f.label :tags, class: 'form-label'
+            #article-tag-form
+
+javascript:
+  var tag_names = #{raw article.tags.pluck(:name).to_json}
