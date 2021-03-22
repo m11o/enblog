@@ -13,6 +13,10 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
+# Indexes
+#
+#  index_articles_on_code  (code) UNIQUE
+#
 class Article < ApplicationRecord
   has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags
@@ -21,7 +25,9 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
   validates :language, presence: true
-  validates :state, presence: true
+  validates :state, presence: true, uniqueness: { case_sensitive: true }
+
+  before_validation :generate_code
 
   enum language: {
     japanese: 0,
@@ -32,4 +38,15 @@ class Article < ApplicationRecord
     closed: 0,
     opened: 1
   }
+
+  private
+
+  def generate_code
+    return if code.present?
+
+    code = "A%09d" % SecureRandom.random_number(10**9)
+    generate_code and return if Article.exists? code: code
+
+    self.code = code
+  end
 end
