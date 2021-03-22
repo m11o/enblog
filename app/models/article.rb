@@ -22,7 +22,6 @@ class Article < ApplicationRecord
 
   validates :code, presence: true, uniqueness: { case_sensitive: true }
   validates :title, presence: true
-  validates :body, presence: true
   validates :language, presence: true
   validates :state, presence: true
 
