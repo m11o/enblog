@@ -6,7 +6,6 @@
 #  code         :string(255)      not null
 #  title        :string(255)      not null
 #  description  :text(65535)
-#  body         :text(16777215)   not null
 #  language     :integer          default("japanese"), not null
 #  state        :integer          default("closed"), not null
 #  published_at :datetime
