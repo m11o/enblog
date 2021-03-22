@@ -42,9 +42,10 @@ class Article < ApplicationRecord
   }
 
   def append_tags(tag_names)
-    return if tag_names.blank?
-
-    tag_names.map { |tag_name| append_tag tag_name }
+    tag_names ||= []
+    delete_tag_ids = will_delete_tag_ids tag_names
+    article_tags.where(tag_id: delete_tag_ids).destroy_all
+    tag_names.each { |tag_name| append_tag tag_name }
   end
 
   private
@@ -60,6 +61,12 @@ class Article < ApplicationRecord
 
   def append_tag(tag_name)
     tag = Tag.find_or_create_by! name: tag_name
+    return if tag.persisted? && article_tags.exists?(tag_id: tag.id)
+
     article_tags.build tag_id: tag.id
+  end
+
+  def will_delete_tag_ids(tag_names)
+    tags.map { |tag| tag_names.include?(tag.name) ? nil : tag.id }.compact
   end
 end
