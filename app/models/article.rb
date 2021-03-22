@@ -20,6 +20,8 @@ class Article < ApplicationRecord
   has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags
 
+  has_rich_text :body
+
   validates :code, presence: true, uniqueness: { case_sensitive: true }
   validates :title, presence: true
   validates :language, presence: true
