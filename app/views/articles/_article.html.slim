@@ -4,8 +4,8 @@ tr
   td
     - article.tags.each do |tag|
       span.badge.bg-secondary.text-light.mr-1.mb-1.p-2 = tag.name
-  td = article.language
-  td = article.state
+  td = article.language_i18n
+  td = article.state_i18n
   td
     .d-flex.flex-nowrap.mb-1
       span.mr-1.datetime-icon 作
