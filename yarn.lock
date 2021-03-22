@@ -7013,6 +7013,11 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+taggle@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/taggle/-/taggle-1.15.0.tgz#d2efb65872886ea199f39c19ddb4f30b5e205ae9"
+  integrity sha512-NW/9NcXj8ZYk1kBojNB9svp4XvpnsS03ryyMLJ6BiHrbDtnL5x1Kf1ASlKsJvnp1bQNuulppo2xQtieu0Qh1yg==
+
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
