@@ -34,3 +34,6 @@
           .mb-3
             = f.label :tags, class: 'form-label'
             #article-tag-form
+
+javascript:
+  var tag_names = #{raw article.tags.pluck(:name).to_json}
