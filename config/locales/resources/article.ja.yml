@@ -12,6 +12,8 @@ ja:
         language: 言語
         state: ステータス
         published_at: 公開日時
+        created_at: 作成日時
+        updated_at: 更新日時
 
   enums:
     article:
