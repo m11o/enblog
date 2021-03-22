@@ -1,0 +1,23 @@
+ja:
+  activerecord:
+    models:
+      article: 記事
+    attributes:
+      article:
+        id: ID
+        code: コード
+        title: タイトル
+        description: 説明文
+        body: 本文
+        language: 言語
+        state: ステータス
+        published_at: 公開日時
+
+  enums:
+    article:
+      state:
+        closed: 非公開
+        opened: 公開
+      language:
+        japanese: 日本語
+        english: 英語
