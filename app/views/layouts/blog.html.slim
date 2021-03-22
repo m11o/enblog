@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title
+      | Love Beautiful Code
+    meta[charset='utf-8']
+    meta[http-equiv="X-UA-Compatible", content="IE=edge,chrome=1"]
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    div
+      = render "blog/shared/header"
+
+      .container
+        .row
+          .col-xs-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
+            = yield
+
+      = render "blog/shared/footer"
