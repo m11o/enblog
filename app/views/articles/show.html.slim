@@ -1,29 +1,45 @@
-h1 articles#show
+.container
+  .p-articles
+    .row
+      .col-12.pt-3
+        .d-flex.flex-row-reverse
+          .btn-group
+            = link_to '編集', edit_article_path(@article), class: 'btn btn-bg btn-outline-dark'
+            = link_to 'プレビュー', '#', class: 'btn btn-bg btn-outline-dark', target: :_blank
+            - if @article.closed?
+              = link_to '公開', '#', class: 'btn btn-bg btn-outline-danger'
+            - else
+              = link_to '非公開', '#', class: 'btn btn-bg btn-outline-danger'
+            = link_to '削除', article_path(@article), class: 'btn btn-bg btn-danger', method: :delete
 
-dl
-  dt コード
-  dd = @article.code
+      .col-12.mt-3
+        .card.mb-3
+          .card-body
+            dl.row
+              dt.col-md-3 = Article.human_attribute_name :code
+              dd.col-md-9 = @article.code
 
-  dt タイトル
-  dd = @article.title
+              dt.col-md-3 = Article.human_attribute_name :title
+              dd.col-md-9 = @article.title
 
-  dt 説明文
-  dd = @article.description
+              dt.col-md-3 = Article.human_attribute_name :state
+              dd.col-md-9 = @article.state
 
-  dt 本文
-  dd = @article.body
+              dt.col-md-3 = Article.human_attribute_name :language
+              dd.col-md-9 = @article.language
 
-  dt language
-  dd = @article.language
+              dt.col-md-3 = Article.human_attribute_name :description
+              dd.col-md-9 = @article.description
 
-  dt ステータス
-  dd = @article.state
+              dt.col-md-3 = Article.human_attribute_name :body
+              dd.col-md-9 = @article.body
 
-  dt 公開日時
-  dd = @article.published_at
+              - if @article.published_at.present?
+                dt.col-md-3 = Article.human_attribute_name :published_at
+                dd.col-md-9 = l @article.published_at, format: :long
 
-  dt 作成日時
-  dd = @article.created_at
+              dt.col-md-3 = Article.human_attribute_name :created_at
+              dd.col-md-9 = l @article.created_at, format: :long
 
-  dt 更新日時
-  dd = @article.updated_at
+              dt.col-md-3 = Article.human_attribute_name :updated_at
+              dd.col-md-9 = l @article.updated_at, format: :long
