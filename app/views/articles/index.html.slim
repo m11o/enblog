@@ -1,12 +1,22 @@
-h1 articles#index
+.container
+  .p-articles
+    .row
+      .col-12.pt-3
+        .d-flex.flex-row-reverse
+          .btn-group
+            = link_to '新規作成', new_article_path, class: 'btn btn-bg btn-warning'
 
-= link_to '新規作成', new_article_path
-
-ul
-  - @articles.each do |article|
-    li
-      ul
-        li = article.title
-        li = link_to '詳細', article_path(article)
-        li = link_to '編集', edit_article_path(article)
-        li = link_to '削除', article_path(article), method: :delete
+      .col-12.mt-3
+        .card.mb-3
+          .card-body
+            table.table.table-responsive-sm
+              thead
+                tr
+                  th = Article.human_attribute_name :code
+                  th = Article.human_attribute_name :title
+                  th = Article.human_attribute_name :language
+                  th = Article.human_attribute_name :state
+                  th
+                  th
+              tbody
+                = render @articles
