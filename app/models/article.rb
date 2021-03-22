@@ -20,6 +20,8 @@ class Article < ApplicationRecord
   has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags
 
+  accepts_nested_attributes_for :article_tags
+
   has_rich_text :body
 
   validates :code, presence: true, uniqueness: { case_sensitive: true }
@@ -39,6 +41,12 @@ class Article < ApplicationRecord
     opened: 1
   }
 
+  def append_tags(tag_names)
+    return if tag_names.blank?
+
+    tag_names.map { |tag_name| append_tag tag_name }
+  end
+
   private
 
   def generate_code
@@ -48,5 +56,10 @@ class Article < ApplicationRecord
     generate_code and return if Article.exists? code: code
 
     self.code = code
+  end
+
+  def append_tag(tag_name)
+    tag = Tag.find_or_create_by! name: tag_name
+    article_tags.build tag_id: tag.id
   end
 end
