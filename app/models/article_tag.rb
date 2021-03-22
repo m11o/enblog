@@ -9,4 +9,6 @@
 #  updated_at :datetime         not null
 #
 class ArticleTag < ApplicationRecord
+  belongs_to :article
+  belongs_to :tag
 end
