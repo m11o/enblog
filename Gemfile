@@ -84,3 +84,5 @@ gem 'slim-rails'
 
 gem 'active_decorator'
 gem 'config'
+
+gem 'enum_help'
