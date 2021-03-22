@@ -13,4 +13,21 @@
 #  updated_at   :datetime         not null
 #
 class Article < ApplicationRecord
+  has_many :article_tags, dependent: :destroy
+  has_many :tags, through: :article_tags
+
+  validates :title, presence: true
+  validates :body, presence: true
+  validates :language, presence: true
+  validates :state, presence: true
+
+  enum language: {
+    japanese: 0,
+    english: 1
+  }
+
+  enum state: {
+    closed: 0,
+    opened: 1
+  }
 end
