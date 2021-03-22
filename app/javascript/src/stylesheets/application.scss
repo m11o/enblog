@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Dancing+Script:wght@400;700&family=Kosugi+Maru&display=swap');
+
 @import "~bootstrap/scss/bootstrap";
 
-h1 {
-  color: red;
+#enblog-logo {
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 25px;
+  letter-spacing: 4px;
 }
