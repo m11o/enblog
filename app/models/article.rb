@@ -6,7 +6,6 @@
 #  code         :string(255)      not null
 #  title        :string(255)      not null
 #  description  :text(65535)
-#  body         :text(16777215)   not null
 #  language     :integer          default("japanese"), not null
 #  state        :integer          default("closed"), not null
 #  published_at :datetime
@@ -21,9 +20,10 @@ class Article < ApplicationRecord
   has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags
 
+  has_rich_text :body
+
   validates :code, presence: true, uniqueness: { case_sensitive: true }
   validates :title, presence: true
-  validates :body, presence: true
   validates :language, presence: true
   validates :state, presence: true
 

@@ -15,3 +15,6 @@ ActiveStorage.start()
 import "jquery/dist/jquery"
 import "popper.js/dist/popper"
 import "bootstrap/dist/js/bootstrap"
+
+require("trix")
+require("@rails/actiontext")
