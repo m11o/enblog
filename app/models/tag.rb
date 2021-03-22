@@ -8,4 +8,8 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
+  has_many :article_tag, dependent: :destroy
+  has_many :article, through: :article_tag
+
+  validates :name, presence: true
 end
