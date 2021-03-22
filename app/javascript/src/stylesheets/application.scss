@@ -2,6 +2,12 @@
 
 @import "~bootstrap/scss/bootstrap";
 
+@import "p-articles";
+
+body {
+  background-color: #f7f7f7;
+}
+
 #enblog-logo {
   font-family: 'Dancing Script', sans-serif;
   font-size: 25px;
