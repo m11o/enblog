@@ -1,8 +1,8 @@
 # rubocop:disable Metrics/BlockLength
 namespace :rp do
   desc 'apply ridgepole'
-  task :apply, %i[spec_name] => :environment do |_task, args|
-    ridgepole('--apply', "--file #{schema}", "--spec-name #{args.spec_name}")
+  task :apply, :environment do
+    ridgepole('--apply', "--file #{schema}")
     exec_annotate
   end
 
