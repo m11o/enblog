@@ -1,0 +1,12 @@
+h1 articles#index
+
+= link_to '新規作成', new_article_path
+
+ul
+  - @articles.each do |article|
+    li
+      ul
+        li = article.title
+        li = link_to '詳細', article_path(article)
+        li = link_to '編集', edit_article_path(article)
+        li = link_to '削除', article_path(article), method: :delete

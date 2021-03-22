@@ -1,0 +1,17 @@
+= form_with model: article, local: true do |f|
+  = f.label :title
+  = f.text_field :title
+
+  = f.label :description
+  = f.text_area :description
+
+  = f.label :body
+  = f.text_area :body
+
+  = f.label :language
+  = f.select :language, [['日本語', :japanese], ['英語', :english]]
+
+  = f.label :state
+  = f.select :state, [['公開', :opened], ['非公開', :closed]]
+
+  = f.submit '登録'
