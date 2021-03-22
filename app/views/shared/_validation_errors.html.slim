@@ -1,0 +1,9 @@
+- if defined?(errors) && errors.present?
+  .alert.alert-danger
+    h4
+      | エラーが発生しました(
+      = errors.count
+      | 件)
+    ul
+      - errors.full_messages.each do |error_message|
+        li = error_message

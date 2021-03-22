@@ -1,3 +1,9 @@
-h1 articles#edit
+.container-fluid
+  .row
+    .offset-md-1.col-12.col-md-10.pt-3
+      .d-flex.flex-row-reverse
+        .btn-group
+          = link_to '詳細', article_path(@article), class: 'btn btn-bg btn-outline-dark'
 
-= render 'form', article: @article
+    .offset-md-1.col-12.col-md-10.my-3
+      = render 'form', article: @article
