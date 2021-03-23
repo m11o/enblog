@@ -72,54 +72,12 @@
   }
 
   &__related-articles {
-    margin-top: 40px;
+    margin-top: 80px;
 
     &__title {
       font-size: 1.6rem;
       border-bottom: 1px solid $secondary;
       padding-bottom: 10px;
-    }
-
-    &__item {
-      background-color: $body-bg;
-      border: none;
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.2);
-
-        a {
-          text-decoration: none;
-        }
-      }
-
-      &__desc {
-        margin: 10px 0 0;
-      }
-
-      &__info {
-        margin-top: 10px;
-
-        &:hover {
-          border-bottom: none;
-        }
-
-        span {
-          margin-right: 10px;
-          opacity: 0.6;
-        }
-
-        ul {
-          padding-left: 0;
-
-          li {
-            margin-left: 7px;
-
-            &::marker {
-              display: none;
-            }
-          }
-        }
-      }
     }
   }
 }

@@ -12,11 +12,4 @@ section.p-article__body
   h3.p-article__related-articles__title 関連記事
 
   ul.list-group.list-group-flush.p-article__related-articles__list
-    li.list-group-item.p-article__related-articles__item
-      a href='#'
-        h3.p-article__related-articles__item__title fuga
-        p.p-article__related-articles__item__desc fuga記事説明文
-        .p-article__related-articles__item__info.d-flex.justify-content-start
-          span 2020-12-13
-          ul.d-flex.text-decoration-none.justify-content-start
-            li.badge.badge-secondary タグ名
+    = render partial: 'blog/article', collection: @related_articles, as: :article, locals: { preview: @preview }

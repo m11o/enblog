@@ -63,7 +63,12 @@ class Article < ApplicationRecord
   end
 
   def recommend_articles
-    Article.joins(:tags).where(tags: tags).order(published_at: :desc).distinct.limit(MAX_RECOMMEND_ARTICLES_COUNT)
+    Article
+      .joins(:tags)
+      .where(tags: tags)
+      .where.not(id: id)
+      .order(published_at: :desc)
+      .distinct.limit(MAX_RECOMMEND_ARTICLES_COUNT)
   end
 
   def published_at

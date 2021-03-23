@@ -1,0 +1,13 @@
+li.list-group-item.p-article-card
+  - url = preview ? articles_preview_path(code: article.code) : article.front_content_path
+  = link_to url
+    h3.p-article-card__title
+      = article.title
+    p.p-article-card__desc
+      = article.description
+    .p-article-card__info
+      - if article.published_at.present?
+        span = l article.published_at, format: :blog
+      ul.d-flex.text-decoration-none.justify-content-start.p-article-card__info__tags
+        - article.tags.each do |tag|
+          li.badge.badge-secondary = tag.name
