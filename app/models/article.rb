@@ -64,6 +64,10 @@ class Article < ApplicationRecord
     "articles/#{code}.html"
   end
 
+  def front_content_path
+    "/#{upload_s3_path}"
+  end
+
   private
 
   def generate_code
