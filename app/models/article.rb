@@ -60,12 +60,22 @@ class Article < ApplicationRecord
     read_attribute(:published_at).presence || updated_at
   end
 
-  def upload_s3_path
-    "articles/#{code}.html"
+  def s3_path
+    self.class.s3_path code
   end
 
   def front_content_path
-    "/#{upload_s3_path}"
+    self.class.front_content_path code
+  end
+
+  class << self
+    def s3_path(code)
+      "articles/#{code}.html"
+    end
+
+    def front_content_path(code)
+      "/#{s3_path(code)}"
+    end
   end
 
   private
