@@ -1,4 +1,12 @@
 nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
   = link_to 'Enblog', root_path, class: 'navbar-brand', id: 'enblog-logo'
-  ul.navbar-nav.mr-auto
-    li.nav-item = link_to Article.model_name.human, articles_path, class: 'nav-link'
+  .collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item = link_to Article.model_name.human, articles_path, class: 'nav-link'
+      li.nav-item.dropdown
+        = link_to '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+          span プレビュー
+        .dropdown-menu.dropdown-menu-left.shadow
+          = link_to 'トップページ', articles_previews_path, class: 'dropdown-item', target: :_blank
+
+

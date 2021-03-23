@@ -1,14 +1,16 @@
 .p-articles
   ul.list-group.list-group-flush.p-articles__list
-    - articles.each do |article|
+    - @articles.each do |article|
       li.list-group-item.p-articles-item
-        = link_to article.code
-        h3.p-articles-item__title
-          = article.title
-        p.p-articles-item__desc
-          = article.body
-        .p-articles-item__info
-          span = article.published_at
-          ul.d-flex.text-decoration-none.justify-content-start.p-articles-item__info__tags
-            - article.tags.each do |tag|
-              li.badge.badge-secondary = tag.name
+        - url = @preview ? articles_preview_path(code: article.code) : article.code
+        = link_to url
+          h3.p-articles-item__title
+            = article.title
+          p.p-articles-item__desc
+            = article.description
+          .p-articles-item__info
+            - if article.published_at.present?
+              span = l article.published_at, format: :blog
+            ul.d-flex.text-decoration-none.justify-content-start.p-articles-item__info__tags
+              - article.tags.each do |tag|
+                li.badge.badge-secondary = tag.name

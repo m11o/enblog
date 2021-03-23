@@ -17,6 +17,8 @@
 #  index_articles_on_code  (code) UNIQUE
 #
 class Article < ApplicationRecord
+  MAX_RECOMMEND_ARTICLES_COUNT = 5
+
   has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags
 
@@ -46,6 +48,14 @@ class Article < ApplicationRecord
     delete_tag_ids = will_delete_tag_ids tag_names
     article_tags.where(tag_id: delete_tag_ids).destroy_all
     tag_names.each { |tag_name| append_tag tag_name }
+  end
+
+  def recommend_articles
+    Article.joins(:tags).where(tags: tags).order(published_at: :desc).distinct.limit(MAX_RECOMMEND_ARTICLES_COUNT)
+  end
+
+  def published_at
+    read_attribute(:published_at).presence || updated_at
   end
 
   private
