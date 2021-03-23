@@ -45,6 +45,16 @@ class Article < ApplicationRecord
     opened: 1
   }
 
+  class << self
+    def s3_path(code)
+      "articles/#{code}.html"
+    end
+
+    def front_content_path(code)
+      "/#{s3_path(code)}"
+    end
+  end
+
   def append_tags(tag_names)
     tag_names ||= []
     delete_tag_ids = will_delete_tag_ids tag_names
@@ -68,14 +78,11 @@ class Article < ApplicationRecord
     self.class.front_content_path code
   end
 
-  class << self
-    def s3_path(code)
-      "articles/#{code}.html"
-    end
+  def delete_s3_content_after_update?
+    state_previous_changes = previous_changes['state']
+    return if state_previous_changes.blank?
 
-    def front_content_path(code)
-      "/#{s3_path(code)}"
-    end
+    state_previous_changes[0] == 'opened' && state_previous_changes[1] == 'closed'
   end
 
   private
@@ -105,12 +112,5 @@ class Article < ApplicationRecord
     return if closed?
 
     self.published_at = Time.zone.now
-  end
-
-  def delete_s3_content_after_update?
-    state_previous_changes = previous_changes['state']
-    return if state_previous_changes.blank?
-
-    state_previous_changes[0] == 'opened' && state_previous_changes[1] == 'closed'
   end
 end

@@ -26,10 +26,10 @@
                   span.badge.bg-secondary.text-light.mr-1.p-2 = tag.name
 
               dt.col-md-3 = Article.human_attribute_name :state
-              dd.col-md-9 = @article.state
+              dd.col-md-9 = @article.state_i18n
 
               dt.col-md-3 = Article.human_attribute_name :language
-              dd.col-md-9 = @article.language
+              dd.col-md-9 = @article.language_i18n
 
               dt.col-md-3 = Article.human_attribute_name :description
               dd.col-md-9 = @article.description
