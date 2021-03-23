@@ -11,7 +11,7 @@ module Articles
     end
 
     def show
-      @article = Article.find_by code: params[:code]
+      @article = Article.find_by! code: params[:code]
       @related_articles = @article.recommend_articles
 
       render 'blog/show'
