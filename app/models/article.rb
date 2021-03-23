@@ -33,6 +33,8 @@ class Article < ApplicationRecord
 
   before_validation :generate_code
 
+  before_update :insert_published_at
+
   enum language: {
     japanese: 0,
     english: 1
@@ -78,5 +80,12 @@ class Article < ApplicationRecord
 
   def will_delete_tag_ids(tag_names)
     tags.map { |tag| tag_names.include?(tag.name) ? nil : tag.id }.compact
+  end
+
+  def insert_published_at
+    return if published_at.present?
+    return if closed?
+
+    self.published_at = Time.zone.now
   end
 end
