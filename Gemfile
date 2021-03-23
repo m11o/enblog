@@ -86,3 +86,6 @@ gem 'active_decorator'
 gem 'config'
 
 gem 'enum_help'
+
+gem 'aws-sdk-cloudfront'
+gem 'aws-sdk-s3'
