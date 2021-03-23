@@ -33,6 +33,7 @@ class ArticlesController < ApplicationController
     update_attributes = article_params.to_h
     @article.append_tags update_attributes.delete(:tags)
     if @article.update update_attributes
+      delete_s3_content @article if @article.delete_s3_content_after_update?
       redirect_to article_path(@article), notice: '更新に成功しました'
     else
       flash.now[:alert] = '更新に失敗しました'
@@ -41,11 +42,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    if @article.opened?
-      Aws::S3DeleteService.call! @article.s3_path
-      generate_article_list
-      Aws::PurgeCacheService.call! @article.front_content_path, '/'
-    end
+    delete_s3_content @article if @article.opened?
     @article.destroy
 
     redirect_to articles_path, notice: "#{@article.title}を削除しました"
@@ -59,5 +56,11 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description, :body, :language, :state, tags: [])
+  end
+
+  def delete_s3_content(article)
+    Aws::S3DeleteService.call! article.s3_path
+    generate_article_list
+    Aws::PurgeCacheService.call! article.front_content_path, '/'
   end
 end

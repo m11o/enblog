@@ -106,4 +106,11 @@ class Article < ApplicationRecord
 
     self.published_at = Time.zone.now
   end
+
+  def delete_s3_content_after_update?
+    state_previous_changes = previous_changes['state']
+    return if state_previous_changes.blank?
+
+    state_previous_changes[0] == 'opened' && state_previous_changes[1] == 'closed'
+  end
 end
