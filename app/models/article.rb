@@ -101,7 +101,7 @@ class Article < ApplicationRecord
   end
 
   def insert_published_at
-    return if published_at.present?
+    return if read_attribute(:published_at).present?
     return if closed?
 
     self.published_at = Time.zone.now
