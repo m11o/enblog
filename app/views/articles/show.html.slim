@@ -7,7 +7,7 @@
             = link_to '一覧', articles_path, class: 'btn btn-bg btn-outline-dark'
             = link_to '編集', edit_article_path(@article), class: 'btn btn-bg btn-outline-dark'
             = link_to 'プレビュー', articles_preview_path(code: @article.code), class: 'btn btn-bg btn-outline-dark', target: :_blank
-            = link_to '公開', articles_publications_path(article_id: @article.id), class: 'btn btn-bg btn-outline-danger', method: :post
+            = link_to '公開', articles_publications_path(code: @article.code), class: 'btn btn-bg btn-outline-danger', method: :post
             = link_to '削除', article_path(@article), class: 'btn btn-bg btn-danger', method: :delete
 
       .col-12.mt-3
