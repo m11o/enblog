@@ -39,7 +39,13 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    if @article.opened?
+      Aws::S3DeleteService.call! @article.upload_s3_path
+      Aws::S3DeleteService.call! 'index.html'
+      Aws::PurgeCacheService.call! @article.front_content_path, '/'
+    end
     @article.destroy
+
     redirect_to articles_path, notice: "#{@article.title}を削除しました"
   end
 
