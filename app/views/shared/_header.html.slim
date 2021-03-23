@@ -5,7 +5,8 @@ nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
       li.nav-item = link_to Article.model_name.human, articles_path, class: 'nav-link'
       li.nav-item.dropdown
         = link_to '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }
-        span プレビュー
+          span プレビュー
         .dropdown-menu.dropdown-menu-left.shadow
-          = link_to 'トップページ', '#', class: 'dropdown-item'
-          = link_to '記事ページ', '#', class: 'dropdown-item'
+          = link_to 'トップページ', articles_previews_path, class: 'dropdown-item', target: :_blank
+
+
