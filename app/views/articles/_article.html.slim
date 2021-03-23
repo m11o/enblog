@@ -22,3 +22,4 @@ tr
     .btn-group.nowrap
       = link_to '編集', edit_article_path(article), class: 'btn btn-sm btn-outline-dark'
       = link_to '詳細', article_path(article), class: 'btn btn-sm btn-outline-dark'
+      = link_to 'プレビュー', articles_preview_path(code: article.code), class: 'btn btn-sm btn-outline-dark', target: :_blank
