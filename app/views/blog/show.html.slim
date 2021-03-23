@@ -1,10 +1,11 @@
 header
-  h1.p-article__title = article.title
-  p.text-right.p-article__updated-at = article.published_at
+  h1.p-article__title = @article.title
+  - if @article.published_at.present?
+    p.text-right.p-article__updated-at = l @article.published_at, format: :blog
 
 section.p-article__body
   .d-block.comment-body.markdown-body.js-comment-body
-    = article.body
+    == @article.body
 
 // without implement
 .p-article__related-articles
