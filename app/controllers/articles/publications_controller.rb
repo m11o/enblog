@@ -1,17 +1,18 @@
 module Articles
-  class PublicationsController < ::FrontBaseController
-    before_action :set_article, :set_articles
+  class PublicationsController < ApplicationController
+    include ::FrontBaseHelper
 
     def create
-      @article.opened!
+      generate_article_content params[:code]
+      generate_article_list
 
-      blog_content_html = render_to_string(template: 'blog/show', layout: 'blog')
-      Aws::S3UploadService.call! blog_content_html, @article.upload_s3_path
+      Aws::PurgeCacheService.call! Article.front_content_path(params[:code]), '/'
 
-      blog_list_html = render_to_string(template: 'blog/index', layout: 'blog')
-      Aws::S3UploadService.call! blog_list_html, 'index.html'
-
-      Aws::PurgeCacheService.call! @article.front_content_path, '/'
+      redirect_to articles_path, notice: '記事を公開しました'
+    rescue StandardError => e
+      Rails.logger.error e
+      Rails.logger.error e.backtrace.join("\n")
+      redirect_to articles_path, notice: '記事の公開に失敗しました'
     end
   end
 end

@@ -1,14 +1,18 @@
 module Articles
-  class PreviewsController < ::FrontBaseController
+  class PreviewsController < ApplicationController
+    include ::FrontBaseHelper
+
+    layout 'blog'
+
     before_action :set_preview
     before_action :set_articles, only: :index
-    before_action :set_article, only: :show
 
     def index
       render 'blog/index'
     end
 
     def show
+      load_article params[:code]
       render 'blog/show'
     end
 
