@@ -1,6 +1,6 @@
 // bootstrapの変数を上書き
-$body-bg: #2f3437;
-$body-color: rgba(255, 255, 255, 0.9);
+$body-bg: #fff;
+$body-color: rgba(47, 52, 55, 1.0); // #2f3437
 $font-family-sans-serif: 'Roboto', 'Kosugi Maru', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-$link-color: rgba(255, 255, 255, 0.6);
-$link-hover-color: rgba(255, 255, 255, 0.8);
+$link-color: rgba(47, 52, 55, 0.8);
+$link-hover-color: rgba(47, 52, 55, 1.0);
