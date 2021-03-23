@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  include ::FrontBaseHelper
+
   before_action :set_article, only: %i[show edit update destroy]
 
   def index
@@ -40,8 +42,8 @@ class ArticlesController < ApplicationController
 
   def destroy
     if @article.opened?
-      Aws::S3DeleteService.call! @article.upload_s3_path
-      Aws::S3DeleteService.call! 'index.html'
+      Aws::S3DeleteService.call! @article.s3_path
+      generate_article_list
       Aws::PurgeCacheService.call! @article.front_content_path, '/'
     end
     @article.destroy
