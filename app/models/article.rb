@@ -60,6 +60,10 @@ class Article < ApplicationRecord
     read_attribute(:published_at).presence || updated_at
   end
 
+  def upload_s3_path
+    "articles/#{code}.html"
+  end
+
   private
 
   def generate_code
