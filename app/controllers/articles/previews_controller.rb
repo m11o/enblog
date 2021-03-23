@@ -1,19 +1,14 @@
 module Articles
-  class PreviewsController < ApplicationController
-    layout 'blog'
-
+  class PreviewsController < ::FrontBaseController
     before_action :set_preview
+    before_action :set_articles, only: :index
+    before_action :set_article, only: :show
 
     def index
-      @articles = Article.includes(:tags).order(published_at: :desc, id: :desc).limit(25)
-
       render 'blog/index'
     end
 
     def show
-      @article = Article.find_by! code: params[:code]
-      @related_articles = @article.recommend_articles
-
       render 'blog/show'
     end
 
