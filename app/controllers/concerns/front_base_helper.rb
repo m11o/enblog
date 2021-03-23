@@ -5,7 +5,7 @@ module FrontBaseHelper
   private
 
   def set_articles
-    @articles = Article.includes(:tags).order(published_at: :desc, id: :desc).limit(MAX_ARTICLE_LIST_COUNT)
+    @articles = Article.opened.includes(:tags).order(published_at: :desc, id: :desc).limit(MAX_ARTICLE_LIST_COUNT)
   end
 
   def load_article(code)
