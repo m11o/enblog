@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   resources :articles
   namespace :articles do
-    resources :previews, only: %i[index show]
+    resources :previews, only: %i[index show], param: :code
   end
 end
