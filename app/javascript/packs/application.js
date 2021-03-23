@@ -18,3 +18,4 @@ require("trix")
 require("@rails/actiontext")
 
 import './tag'
+import './highlight'
