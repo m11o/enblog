@@ -1,0 +1,125 @@
+.p-article {
+  &__title {
+    font-size: 2.0rem;
+    margin: 4rem 0 3rem;
+    line-height: 1;
+  }
+
+  &__updated-at {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &__body {
+    margin-top: 0 !important;
+
+    .markdown-body {
+      color: $body-color !important;
+
+      a {
+        color: $link-color !important;
+
+        &:hover {
+          color: $link-hover-color !important;
+        }
+      }
+    }
+
+    p, ul, ol, h2, h3, h4, h5, pre, blockquote, .nuxt-content-highlight {
+      margin-bottom: 24px;
+    }
+
+    h2,h3,h4,h5 {
+      margin-top: 48px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-bottom: 1px solid $secondary;
+      padding-bottom: 10px;
+    }
+    h3 { font-size: 1.4rem; }
+    h4 { font-size: 1.2rem; }
+    h5 { font-size: 1.1rem; }
+
+    pre {
+      background-color: $light;
+      padding-left: 20px;
+      border-radius: 4px;
+      display: inline-block;
+      width: 100%;
+
+      code {
+        display: block;
+      }
+    }
+
+    blockquote {
+      background-color: $light;
+      display: block;
+      padding: 15px 20px;
+      color: $dark;
+      border-radius: 4px;
+      font-style: italic;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__related-articles {
+    margin-top: 40px;
+
+    &__title {
+      font-size: 1.6rem;
+      border-bottom: 1px solid $secondary;
+      padding-bottom: 10px;
+    }
+
+    &__item {
+      background-color: $body-bg;
+      border: none;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      &__desc {
+        margin: 10px 0 0;
+      }
+
+      &__info {
+        margin-top: 10px;
+
+        &:hover {
+          border-bottom: none;
+        }
+
+        span {
+          margin-right: 10px;
+          opacity: 0.6;
+        }
+
+        ul {
+          padding-left: 0;
+
+          li {
+            margin-left: 7px;
+
+            &::marker {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
