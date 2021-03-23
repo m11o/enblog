@@ -17,6 +17,7 @@
 
       a {
         color: $link-color !important;
+        text-decoration: underline;
 
         &:hover {
           color: $link-hover-color !important;
@@ -42,14 +43,12 @@
     h5 { font-size: 1.1rem; }
 
     pre {
-      background-color: $light;
-      padding-left: 20px;
+      padding: 15px 20px;
       border-radius: 4px;
-      display: inline-block;
       width: 100%;
 
-      code {
-        display: block;
+      &.hljs {
+        background-color: $code-background-color;
       }
     }
 

@@ -33,6 +33,10 @@
       max-width: 100% !important;
     }
   }
+
+  pre.hljs {
+    background: $code-background-color
+  }
 }
 
 trix-editor {
@@ -40,7 +44,7 @@ trix-editor {
   border-radius: 3px;
   margin: 0;
   padding: 0.4em 0.6em;
-  min-height: 5em;
+  min-height: 400px;
   outline: none;
   margin-bottom: 20px;
 }
