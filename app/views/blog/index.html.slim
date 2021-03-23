@@ -1,8 +1,9 @@
 .p-articles
   ul.list-group.list-group-flush.p-articles__list
-    - @articles.each do |article|
+    = render partial: 'blog/article', collection: @articles, as: :article, locals: { preview: @preview }
+    /- @articles.each do |article|
       li.list-group-item.p-articles-item
-        - url = @preview ? articles_preview_path(code: article.code) : article.code
+        - url = @preview ? articles_preview_path(code: article.code) : article.front_content_path
         = link_to url
           h3.p-articles-item__title
             = article.title
