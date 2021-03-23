@@ -63,7 +63,7 @@ class Article < ApplicationRecord
   def generate_code
     return if code.present?
 
-    code = "A%09d" % SecureRandom.random_number(10**9)
+    code = format 'A%09d', SecureRandom.random_number(10**9)
     generate_code and return if Article.exists? code: code
 
     self.code = code
