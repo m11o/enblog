@@ -1,0 +1,26 @@
+name: 'Copy to S3'
+description: 'copy article to s3'
+inputs:
+  AWS_ACCESS_KEY_ID:
+    description: 'AWS ACCESS KEY ID'
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: 'AWS SECRET ACCESS KEY'
+    required: true
+  AWS_REGION:
+    description: 'AWS REGION'
+    required: false
+    default: 'ap-northeast-1'
+  UPLOAD_FILE_PATH:
+    description: 'path whose article will be wanted to upload'
+    required: true
+  S3_BUCKET_NAME:
+    description: 'AWS S3 BUCKET NAME'
+    required: true
+  UPLOAD_OPTIONS:
+    description: 'set s3 copy options'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

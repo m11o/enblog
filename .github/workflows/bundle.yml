@@ -1,0 +1,54 @@
+name: bundle and upload assets
+on: workflow_dispatch
+
+jobs:
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      ruby-version: [ '3.0' ]
+
+  env:
+    RAILS_ENV: production
+
+  steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+      # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      # uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@v1.66.0
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: bundle files
+      run: bundle exec rails webpacker:compile
+
+    - name: upload stylesheet
+      uses: masahito1997/enblog/.github/actions/copy_to_s3/@v1.0.0
+      env:
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-northeast-1'
+        UPLOAD_FILE_PATH: 'public/packs/css/blog.css'
+        S3_UPLOAD_PATH: 'application.css'
+
+    - name: upload javascript
+      uses: masahito1997/enblog/.github/actions/copy_to_s3/@v1.0.0
+      env:
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-northeast-1'
+        UPLOAD_FILE_PATH: 'public/packs/js/blog.js'
+        S3_UPLOAD_PATH: 'application.js'
+
+    - name: purge cloudfront cache
+      uses: masahito1997/blog/.github/actions/purge_cache/@v1.0.0
+      env:
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_PURGE_PATHS: '"/application.css" "/application.js"'
+        AWS_REGION: 'ap-northeast-1'
