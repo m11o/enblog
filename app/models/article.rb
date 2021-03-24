@@ -51,7 +51,7 @@ class Article < ApplicationRecord
     end
 
     def front_content_path(code)
-      "/#{s3_path(code)}"
+      "/articles/#{code}"
     end
   end
 
@@ -68,7 +68,8 @@ class Article < ApplicationRecord
       .where(tags: tags)
       .where.not(id: id)
       .order(published_at: :desc)
-      .distinct.limit(MAX_RECOMMEND_ARTICLES_COUNT)
+      .distinct
+      .limit(MAX_RECOMMEND_ARTICLES_COUNT)
   end
 
   def published_at

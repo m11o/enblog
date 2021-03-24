@@ -38,22 +38,11 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}-v1
-          restore-keys: |
-            ${{ runner.os }}-node-
-            ${{ runner.OS }}-
-
-      - name: npm install
-        run: yarn --frozen-lockfile
-
       - name: run rubocop
         run: bundle exec rubocop
+
+      - name: setup database
+        run: bundle exec rails db:create rp:apply
+
+      - name: run tests
+        run: bundle exec rspec
