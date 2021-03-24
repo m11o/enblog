@@ -21,6 +21,7 @@ module FrontBaseHelper
     lang = lang.to_sym
     load_articles(lang == :ja ? :japanese : :english)
 
+    I18n.locale = lang
     blog_list_html = render_to_string(template: 'blog/index', layout: 'blog')
     s3_path = lang.to_sym == :ja ? "ja/#{ARTICLE_LIST_FILENAME}" : ARTICLE_LIST_FILENAME
     Aws::S3UploadService.call! blog_list_html, s3_path
@@ -31,6 +32,8 @@ module FrontBaseHelper
   def generate_article_content(code)
     load_article code
     @article.opened!
+
+    I18n.locale = @article.code
     blog_content_html = render_to_string(template: 'blog/show', layout: 'blog')
     Aws::S3UploadService.call! blog_content_html, @article.s3_path
 

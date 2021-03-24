@@ -60,8 +60,7 @@ class ArticlesController < ApplicationController
 
   def delete_s3_content(article)
     Aws::S3DeleteService.call! article.s3_path
-    I18n.locale = article.japanese? ? :ja : :en
-    generated_list_path = generate_article_list I18n.locale
+    generated_list_path = generate_article_list article.i18n_locale_from_language
 
     Aws::PurgeCacheService.call! article.front_content_path, generated_list_path
   end
