@@ -7,9 +7,7 @@ module ApplicationHelper
       description: 'top and contents list page',
       keywords: 'ruby,blog,programming,python,javascript',
       canonical: '/',
-      icon: [
-        { href: '/favicon.ico' }
-      ]
+      icon: [{ href: '/favicon.ico' }]
     }
   end
 end
