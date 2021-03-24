@@ -5,6 +5,7 @@
         .d-flex.flex-row-reverse
           .btn-group
             = link_to '新規作成', new_article_path, class: 'btn btn-bg btn-warning'
+            = link_to '一括作成', articles_bulk_creations_path, class: 'btn btn-bg btn-danger', method: :post
 
       .col-12.mt-3
         .card.mb-3

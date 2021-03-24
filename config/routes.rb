@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :articles do
     resources :previews, only: %i[index show], param: :code
     resources :publications, only: %i[create]
+    resources :bulk_creations, only: :create
   end
   resources :articles
 end
