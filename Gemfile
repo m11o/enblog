@@ -89,3 +89,5 @@ gem 'enum_help'
 
 gem 'aws-sdk-cloudfront'
 gem 'aws-sdk-s3'
+
+gem 'meta-tags'
