@@ -4,8 +4,12 @@ module FrontBaseHelper
 
   private
 
-  def set_articles
-    @articles = Article.opened.includes(:tags).order(published_at: :desc, id: :desc).limit(MAX_ARTICLE_LIST_COUNT)
+  def set_articles(lang = :japanese)
+    @articles = Article.opened
+                       .where(language: lang)
+                       .includes(:tags)
+                       .order(published_at: :desc, id: :desc)
+                       .limit(MAX_ARTICLE_LIST_COUNT)
   end
 
   def load_article(code)
@@ -14,7 +18,8 @@ module FrontBaseHelper
   end
 
   def generate_article_list(lang = :ja)
-    set_articles
+    lang = lang.to_sym
+    set_articles(lang == :ja ? :japanese : :english)
 
     blog_list_html = render_to_string(template: 'blog/index', layout: 'blog')
     s3_path = lang.to_sym == :ja ? "/ja/#{ARTICLE_LIST_FILENAME}" : ARTICLE_LIST_FILENAME
