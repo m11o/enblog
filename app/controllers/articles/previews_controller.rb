@@ -8,11 +8,13 @@ module Articles
     before_action :set_articles, only: :index
 
     def index
+      I18n.locale = params[:lang].presence || I18n.default_locale
       render 'blog/index'
     end
 
     def show
       load_article params[:code]
+      I18n.locale = @article.japanese? ? :ja : :en
       render 'blog/show'
     end
 
