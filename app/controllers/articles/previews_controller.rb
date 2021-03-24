@@ -8,7 +8,7 @@ module Articles
 
     def index
       I18n.locale = params[:lang].presence || I18n.default_locale
-      set_articles I18n.locale == :ja ? :japanese : :english
+      load_articles I18n.locale == :ja ? :japanese : :english
 
       render 'blog/index'
     end

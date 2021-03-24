@@ -4,7 +4,7 @@ module FrontBaseHelper
 
   private
 
-  def set_articles(lang = :japanese)
+  def load_articles(lang = :japanese)
     @articles = Article.opened
                        .where(language: lang)
                        .includes(:tags)
@@ -19,7 +19,7 @@ module FrontBaseHelper
 
   def generate_article_list(lang = :ja)
     lang = lang.to_sym
-    set_articles(lang == :ja ? :japanese : :english)
+    load_articles(lang == :ja ? :japanese : :english)
 
     blog_list_html = render_to_string(template: 'blog/index', layout: 'blog')
     s3_path = lang.to_sym == :ja ? "ja/#{ARTICLE_LIST_FILENAME}" : ARTICLE_LIST_FILENAME
