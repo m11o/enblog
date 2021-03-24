@@ -46,13 +46,23 @@ class Article < ApplicationRecord
   }
 
   class << self
-    def s3_path(code)
-      "articles/#{code}.html"
+    def s3_path(code, lang: :ja)
+      "#{parent_directory(lang)}#{code}.html"
     end
 
-    def front_content_path(code)
-      "/articles/#{code}"
+    def front_content_path(code, lang: :ja)
+      "/#{parent_directory(lang)}#{code}"
     end
+
+    private
+
+    def parent_directory(lang = :ja)
+      "#{lang}/articles/"
+    end
+  end
+
+  def i18n_locale_from_language
+    japanese? ? :ja : :en
   end
 
   def append_tags(tag_names)
@@ -77,11 +87,11 @@ class Article < ApplicationRecord
   end
 
   def s3_path
-    self.class.s3_path code
+    self.class.s3_path code, lang: i18n_locale_from_language
   end
 
   def front_content_path
-    self.class.front_content_path code
+    self.class.front_content_path code, lang: i18n_locale_from_language
   end
 
   def delete_s3_content_after_update?

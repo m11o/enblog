@@ -7,6 +7,7 @@ module Aws
         return if paths.blank?
 
         response = create_invalidation! paths
+        Rails.logger.info response.inspect
         return if response.present? && response.invalidation.present? && (response.invalidation.status == 'InProgress')
 
         Rails.logger.warn "Fail to delete cache of #{paths.join(', ')}"

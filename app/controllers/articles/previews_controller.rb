@@ -14,7 +14,7 @@ module Articles
 
     def show
       load_article params[:code]
-      I18n.locale = @article.japanese? ? :ja : :en
+      I18n.locale = @article.i18n_locale_from_language
       render 'blog/show'
     end
 
