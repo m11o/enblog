@@ -15,10 +15,13 @@ module Articles
     private
 
     def publish_content_and_purge!
-      generate_article_content params[:code]
-      generate_article_list
+      @article = Article.find_by! code: params[:code]
+      I18n.locale = @article.i18n_locale_from_language
 
-      Aws::PurgeCacheService.call! Article.front_content_path(params[:code]), '/'
+      generated_article_path = generate_article_content params[:code]
+      generated_list_path = generate_article_list I18n.locale
+
+      Aws::PurgeCacheService.call! generated_article_path, generated_list_path
     end
   end
 end
