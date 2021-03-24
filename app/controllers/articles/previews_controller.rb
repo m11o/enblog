@@ -5,10 +5,11 @@ module Articles
     layout 'blog'
 
     before_action :set_preview
-    before_action :set_articles, only: :index
 
     def index
       I18n.locale = params[:lang].presence || I18n.default_locale
+      set_articles I18n.locale == :ja ? :japanese : :english
+
       render 'blog/index'
     end
 
