@@ -19,7 +19,7 @@ module Aws
       def create_invalidation!(paths)
         cloudfront_client.create_invalidation(
           {
-            distribution_id: ENV['AWS_CLOUD_FRONT_DISTRIBUTION_ID'],
+            distribution_id: Rails.application.credentials.aws[:cloud_front][:distribution_id],
             invalidation_batch: {
               paths: { quantity: paths.size, items: paths },
               # @see http://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateInvalidation.html#API_CreateInvalidation_RequestSyntax

@@ -1,11 +1,11 @@
 module Aws
   module CommonHelper
     def aws_credentials
-      aws_credentials = {}
-      aws_credentials[:region] = ENV['AWS_REGION']
-      aws_credentials[:access_key_id] = ENV['AWS_ACCESS_KEY_ID']
-      aws_credentials[:secret_access_key] = ENV['AWS_SECRET_ACCESS_KEY']
-      aws_credentials
+      {
+        region: Rails.application.credentials.aws[:region],
+        access_key_id: Rails.application.credentials.aws[:access_key_id],
+        secret_access_key: Rails.application.credentials.aws[:secret_access_key]
+      }
     end
 
     def cloudfront_client
@@ -17,7 +17,7 @@ module Aws
     end
 
     def s3_bucket_name
-      ENV['AWS_DEFAULT_BUCKET']
+      Rails.application.credentials.aws[:s3][:default_bucket_name]
     end
   end
 end
