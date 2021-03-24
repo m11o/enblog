@@ -17,7 +17,7 @@ module Aws
     end
 
     def s3_bucket_name
-      Rails.application.credentials.aws[:s3][:default_bucket_name]
+      ENV['S3_DEFAULT_BUCKET_NAME']
     end
   end
 end
