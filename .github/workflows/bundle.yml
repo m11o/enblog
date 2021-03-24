@@ -23,6 +23,23 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
 
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}-v1
+          restore-keys: |
+            ${{ runner.os }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install packages
+        run: yarn --frozen-lockfile
+
       - name: bundle files
         run: bundle exec rails webpacker:compile
 
