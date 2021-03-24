@@ -28,5 +28,7 @@ module Enblog
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     config.generators.template_engine = :slim
+
+    config.hosts.clear
   end
 end
