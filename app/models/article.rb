@@ -75,7 +75,7 @@ class Article < ApplicationRecord
   def recommend_articles
     Article
       .joins(:tags)
-      .where(tags: tags)
+      .where(tags: tags, language: language)
       .where.not(id: id)
       .order(published_at: :desc)
       .distinct
