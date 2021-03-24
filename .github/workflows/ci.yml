@@ -1,4 +1,4 @@
-name: test
+name: ci
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - '**'
 
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,6 +25,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
     env:
+      DB_USERNAME: root
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
       RAILS_ENV: test
