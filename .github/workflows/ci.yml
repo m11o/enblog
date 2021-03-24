@@ -1,0 +1,59 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.0']
+
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+    env:
+      DB_USERNAME: root
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      RAILS_ENV: test
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+      # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      # uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.66.0
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}-v1
+          restore-keys: |
+            ${{ runner.os }}-node-
+            ${{ runner.OS }}-
+
+      - name: npm install
+        run: yarn --frozen-lockfile
+
+      - name: run rubocop
+        run: bundle exec rubocop
