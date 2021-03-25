@@ -33,7 +33,7 @@ module FrontBaseHelper
     load_article code
     @article.opened!
 
-    I18n.locale = @article.code
+    I18n.locale = @article.i18n_locale_from_language
     blog_content_html = render_to_string(template: 'blog/show', layout: 'blog')
     Aws::S3UploadService.call! blog_content_html, @article.s3_path
 
