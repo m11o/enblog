@@ -206,3 +206,6 @@ ja:
       short: "%m/%d %H:%M"
       blog: "%Y/%m/%d"
     pm: 午後
+
+  top:
+    path: "/ja"

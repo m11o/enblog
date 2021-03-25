@@ -214,3 +214,6 @@ en:
       short: "%d %b %H:%M"
       blog: "%Y/%m/%d"
     pm: pm
+
+  top:
+    path: "/"
