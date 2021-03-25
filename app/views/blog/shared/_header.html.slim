@@ -4,13 +4,13 @@ header.p-header
       .col-xs-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
         ul.nav.justify-content-end
           li.nav-item
-            = link_to "TOP", "/", class: "nav-link text-decoration-none"
+            = link_to "TOP", t('top.path'), class: "nav-link text-decoration-none"
           li.nav-item
             = link_to "Github", "https://github.com/masahito1997", class: "nav-link text-decoration-none"
           - if I18n.locale == :ja
-            = link_to 'English', '/', class: "nav-link text-decoration-none"
+            = link_to 'English', t('top.path', locale: :en), class: "nav-link text-decoration-none"
           - else
-            = link_to '日本語', '/ja', class: "nav-link text-decoration-none"
+            = link_to '日本語', t('top.path', locale: :ja), class: "nav-link text-decoration-none"
         h1.text-center.p-header__title
-          = link_to "/", class: "text-decoration-none" do
+          = link_to t('top.path'), class: "text-decoration-none" do
             | Love Beautiful Code
