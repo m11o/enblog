@@ -2,6 +2,10 @@
 
 header
   h1.p-article__title = @article.title
+  - if @article.tags.present?
+    ul.d-flex.text-decoration-none.justify-content-start.pl-0.mb-0
+      - @article.tags.each do |tag|
+        li.badge.badge-secondary.mr-2.py-1.px-2 = tag.name
   - if @article.published_at.present?
     p.text-right.p-article__updated-at = l @article.published_at, format: :blog
 
